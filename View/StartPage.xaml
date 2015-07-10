@@ -1,0 +1,77 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="PsychicTest.View.StartPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/background3.jpg"
+                        Opacity="0.4"
+                        Stretch="UniformToFill"></ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,20,0,28">
+            <TextBlock Text="ARE YOU PSYCHIC?" 
+                       FontSize="45"
+                       FontWeight="Bold" 
+                       HorizontalAlignment="Center"
+                       RenderTransformOrigin="0.5,0.5" 
+                       FontFamily="Aharoni" >
+                <TextBlock.RenderTransform>
+                    <CompositeTransform Rotation="1"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <TextBlock Text="Choose your test..."
+                       Margin="0,20"
+                       TextAlignment="Center"
+                       FontSize="35" FontFamily="Comic Sans MS" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <CompositeTransform Rotation="-3"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Canvas x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+
+            <Image Source="/Assets/Images/game_zener.png"
+                   Stretch="Uniform"
+                   Height="150"
+                   Width="150"
+                   Tap="ZenerSelect" Canvas.Left="165" Canvas.Top="60"/>
+
+            <Image Source="/Assets/Images/game_color.png"
+                   Width="150"
+                   Height="150"
+                   Tap="ColorSelect" Canvas.Left="165" Canvas.Top="265"></Image>
+
+            <Image Source="/Assets/Images/setting2.png"
+                   Width="80"
+                   Height="80"
+                   Tap="SettingSelect" Canvas.Left="366" Canvas.Top="470"></Image>
+
+            <Image Source="/Assets/Images/high_score_2.png"
+                   Width="80"
+                   Height="80"
+                   Tap="HighScoreSelect" Canvas.Left="10" Canvas.Top="470"></Image>
+        </Canvas>
+    </Grid>
+
+</phone:PhoneApplicationPage>

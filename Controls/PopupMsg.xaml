@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="PsychicTest.Controls.PopupMsg"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="800" d:DesignWidth="480">
+    <UserControl.Resources>
+        <Storyboard x:Name="AnimationHide">
+            <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LayoutRoot" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="AnimationShow">
+            <DoubleAnimation Duration="0:0:0.2" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LayoutRoot" d:IsOptimized="True"/>
+        </Storyboard>
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot">
+
+        <Grid Background="White"
+              Tap="BackgroundTap"
+          Opacity="0.3"></Grid>
+
+        <Border  Background="#1d1d1d"
+                 BorderThickness="1"
+                 CornerRadius="20"
+                 Width="200"
+                 Height="200">
+            <Grid Tap="GridWarningTap">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Wrong"
+                           x:Name="TxtTitle"
+                          Margin="0,15,0,5"
+                          FontSize="30"
+                          TextAlignment="Center"
+                          Foreground="White"/>
+                
+                <Image Source="/Assets/Images/cancel.png"
+                       Grid.Row="1"
+                       x:Name="ImgWarning"
+                       Width="100"/>
+
+                <TextBlock Text="TAP TO CONTINUE"
+                           Grid.Row="2"
+                          Margin="0,5,0,5"
+                          FontSize="16"
+                           x:Name="TxtWarning"
+                          TextAlignment="Center"
+                          Foreground="White"/>
+            </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>

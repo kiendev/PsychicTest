@@ -1,0 +1,140 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="PsychicTest.View.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/background3.jpg"
+                        Opacity="0.4"
+                        Stretch="UniformToFill"></ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        
+        <phone:Pivot Grid.Row="0">
+            <phone:PivotItem Header="setting">
+                <StackPanel x:Name="ContentPanel" Margin="12,0,12,0">
+                    <toolkit:ToggleSwitch Header="Sound"
+                                  IsChecked="True"
+                                  x:Name="SoundSwitch">
+                    </toolkit:ToggleSwitch>
+
+                    <StackPanel>
+                        <toolkit:ListPicker Header="Number of guesses"
+                                    x:Name="LspNumberGuesses"
+SelectionChanged="LspNumberGuesses_OnSelectionChanged">
+                            <toolkit:ListPicker.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}" Margin="12 0 0 0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </toolkit:ListPicker.ItemTemplate>
+                            <toolkit:ListPicker.FullModeItemTemplate>
+                                <DataTemplate x:Name="PickerFullModeItemTemplate">
+                                    <StackPanel Orientation="Horizontal" Margin="16 15 0 20">
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </toolkit:ListPicker.FullModeItemTemplate>
+                        </toolkit:ListPicker>
+                    </StackPanel>
+
+                </StackPanel>
+            </phone:PivotItem>
+
+            <phone:PivotItem Header="about">
+                <Grid Margin="12,0,12,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel>
+                        <TextBlock 
+                    Text="Psychic Test" 
+                    Margin="12,0,12,0" 
+                    FontSize="{StaticResource PhoneFontSizeLarge}" 
+                    FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                        <TextBlock 
+                    Text="Version 1.1" 
+                    Margin="12,0,12,0" 
+                    FontSize="{StaticResource PhoneFontSizeNormal}"/>
+                    </StackPanel>
+
+                    <TextBlock 
+                Grid.Row="1" 
+                Text="Did you ever wonder if you were psychic? Ever pick up the phone and know who it was? Are you extremely lucky and always pick the right path?
+Maybe your psychic!
+
+This App is designed to test your psychic ability in 2 areas with hidden card tests. Each have a classic approach to wrong answers (YOU GET SHOCKED)
+
+-Classic Zener cards
+-Colors
+
+Compete with the world to become the top psychic or test your skills against your friends, family and co-workers.
+"
+                Margin="12,24,12,24" 
+                TextWrapping="Wrap" 
+                Foreground="{StaticResource PhoneSubtleBrush}" 
+                FontSize="{StaticResource PhoneFontSizeNormal}" />
+                    <HyperlinkButton Grid.Row="2" 
+                                     Content="contact/feedback via email" 
+                                     Margin="0,12,0,0" 
+                                     HorizontalAlignment="Left" 
+                                     Foreground="{StaticResource PhoneAccentBrush}" 
+                                     FontSize="{StaticResource PhoneFontSizeNormal}"
+                                     Click="SendMailClick"/>
+                    <HyperlinkButton Grid.Row="3"
+                                     Content="rate app" 
+                                     Margin="0,12,0,0" 
+                                     HorizontalAlignment="Left" 
+                                     Foreground="{StaticResource PhoneAccentBrush}" 
+                                     FontSize="{StaticResource PhoneFontSizeNormal}"
+                                     Click="RateAppClick"/>
+                    
+                    <HyperlinkButton Grid.Row="4"
+                                     Content="share" 
+                                     Margin="0,12,0,0" 
+                                     HorizontalAlignment="Left" 
+                                     Foreground="{StaticResource PhoneAccentBrush}" 
+                                     FontSize="{StaticResource PhoneFontSizeNormal}" 
+                                     Click="ShareClick"/>
+                    
+                    <StackPanel Grid.Row="5" Margin="12,0,12,50" VerticalAlignment="Bottom">
+                        <TextBlock 
+                    Text="copyright © 2015" 
+                    Margin="0,12,0,0" 
+                    FontSize="{StaticResource PhoneFontSizeNormal}"/>
+
+                    </StackPanel>
+                </Grid>
+            </phone:PivotItem>
+        </phone:Pivot>
+
+        <!--ContentPanel - place additional content here-->
+        
+    </Grid>
+
+</phone:PhoneApplicationPage>

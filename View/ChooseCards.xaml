@@ -1,0 +1,262 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="PsychicTest.View.ChooseCards"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="FlipCardStoryboard">
+            <PointAnimation Duration="0:0:0.5" To="0.5,0.5" Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="BackCard" d:IsOptimized="True"/>
+
+            <DoubleAnimation Duration="0:0:0.5" To="90" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="BackCard" d:IsOptimized="True"/>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="FrontCard">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="FrontCard">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+        </Storyboard>
+
+        <Storyboard x:Name="CloseCardStoryboard">
+            <PointAnimation Duration="0:0:0.5" To="0.5,0.5" Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="FrontCard" d:IsOptimized="True"/>
+
+            <DoubleAnimation Duration="0:0:0.5" To="90" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="FrontCard" d:IsOptimized="True"/>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="BackCard">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BackCard">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Name="QuickMenuStoryboard">
+            <DoubleAnimation Duration="0:0:0.5" To="235" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="QuickMenu" d:IsOptimized="True"/>
+        </Storyboard>
+
+        <Storyboard x:Name="CloseMenuStoryboard">
+            <DoubleAnimation Duration="0:0:0.5" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="QuickMenu" d:IsOptimized="True"/>
+        </Storyboard>
+    </phone:PhoneApplicationPage.Resources>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/background3.jpg"
+                        Opacity="0.4"
+                        Stretch="UniformToFill"></ImageBrush>
+        </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Canvas Canvas.ZIndex="100">
+                <Border x:Name="QuickMenu"  
+                    Background="#555555"
+                    BorderThickness="1"
+                    Margin="0,-235,0,0"
+                    Height="200"
+                    Width="480"
+                    CornerRadius="20" RenderTransformOrigin="0.5,0.5">
+                    <Border.RenderTransform>
+                        <CompositeTransform/>
+                    </Border.RenderTransform>
+                    <Grid VerticalAlignment="Bottom"
+                      Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Tap="ResetGameTap">
+                            <Image Source="/Assets/Images/play_again.png"
+                               Width="90"></Image>
+
+                            <TextBlock Text="RESTART TEST"
+                                   FontSize="18" FontFamily="Aharoni" 
+                                   FontWeight="Bold"
+                                   Margin="0,10,0,0"
+                                   HorizontalAlignment="Center"></TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1"
+                                Tap="NewTestTap">
+                            <Image Source="/Assets/Images/new_game.png"
+                               Width="90"></Image>
+
+                            <TextBlock Text="NEW TEST"
+                                   FontSize="18" FontFamily="Aharoni" 
+                                   FontWeight="Bold"
+                                   Margin="0,10,0,0"
+                                   HorizontalAlignment="Center"></TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2"
+                                Tap="TopPsychicTap">
+                            <Image Source="/Assets/Images/high_score.png"
+                               Width="90"></Image>
+
+                            <TextBlock Text="TOP PSYCHIC"
+                                   Margin="0,10,0,0"
+                                   FontSize="18" FontFamily="Aharoni" 
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Canvas>
+
+            <Grid x:Name="GridHeader" 
+              Canvas.ZIndex="200"
+              Height="50"
+              Grid.Row="0"
+              Margin="12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="/Assets/Images/info-icon.png"
+                   Margin="0,5,0,0"
+                       x:Name="ImgQuickMenu"
+                   Tap="OpenQuickMenu"></Image>
+
+                <TextBlock Grid.Column="1"
+                       Text=":30"
+                       FontSize="35"
+                       x:Name="TxtTimer"
+                       Visibility="Collapsed"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+
+                <TextBlock Grid.Column="2"
+                       x:Name="TxtCountTime"
+                           Tap="TrickModeTap"
+                       Text="0/10"
+                       FontSize="35"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+            </Grid>
+        
+        <Grid x:Name="GameGrid" 
+              Visibility="Visible"
+              Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--ContentPanel - place additional content here-->
+            <Grid x:Name="ContentPanel" Grid.Row="0" Margin="12,0,12,0"
+              Canvas.ZIndex="90">
+                <Image x:Name="FrontCard" Margin="55,15,51,15" 
+                   Source="/Assets/Images/AceSpades.png" Stretch="Fill" Visibility="Collapsed"
+                   Tap="FrontCard_OnTap">
+                    <Image.RenderTransform>
+                        <CompositeTransform/>
+                    </Image.RenderTransform>
+                    <Image.Projection>
+                        <PlaneProjection/>
+                    </Image.Projection>
+                </Image>
+                <Image x:Name="BackCard" 
+                   Margin="55,15,51,15" Source="/Assets/Images/CardBack.png" Stretch="Fill" Tap="cardBack_Tap">
+                    <Image.Projection>
+                        <PlaneProjection/>
+                    </Image.Projection>
+                    <Image.RenderTransform>
+                        <CompositeTransform/>
+                    </Image.RenderTransform>
+                </Image>
+            </Grid>
+
+            <Grid Grid.Row="1"
+              VerticalAlignment="Center"
+              Margin="15,0,15,0"
+              x:Name="ContentCards">
+                <!--<Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>-->
+
+                <ListBox x:Name="ListBoxCards"
+                     VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding CardThumb}"
+                               Tag="{Binding CardId}"
+                               Margin="5,0"
+                               Width="80"
+                               Tap="ImgCardOnTap"
+                               Stretch="Uniform"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Grid>
+        
+        <StackPanel x:Name="ScoreGrid"
+              Grid.Row="1"
+              Visibility="Collapsed">
+
+            <TextBlock x:Name="TxtResult"
+                       FontWeight="SemiBold"
+                       Margin="0,120,0,0"
+                       Text="2 Out of 10"
+                       FontSize="35"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+
+            <TextBlock x:Name="TxtRatio"
+                       Text="Ratio: 2.58, considered very significant"
+                       FontSize="30"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Enter your name below"
+                       FontSize="30"
+                       FontWeight="Thin"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+            
+            <TextBox Width="400"
+                     Margin="0,20"
+                     x:Name="TbPlayername"
+                     KeyUp="TbPlayername_OnKeyUp"></TextBox>
+
+        </StackPanel>
+    </Grid>
+
+</phone:PhoneApplicationPage>
